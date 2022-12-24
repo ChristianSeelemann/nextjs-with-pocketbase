@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  @apply font-primary;
+}
+
+@layer components {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold font-secondary;
+  }
+  h1 {
+    @apply text-4xl pb-6;
+  }
+  h2 {
+    @apply text-2xl pb-5;
+  }
+  h3 {
+    @apply text-xl pb-3;
+  }
+  h4,
+  h5,
+  h6 {
+    @apply text-lg pb-2;
+  }
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #abc8ff2a transparent;
+}
+
+html.dark * {
+  scrollbar-color: #abc8ff2a transparent;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 0.4rem;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #4f545e4d;
+  border-radius: 12px;
+}
+
+html.dark *::-webkit-scrollbar-thumb {
+  background-color: #abc8ff2a;
+  border-radius: 12px;
+}
