@@ -15,6 +15,7 @@ import { NextUIProvider, createTheme, globalCss } from "@nextui-org/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import globalStyles from "../helpers/globalStyles";
 import { themeLight, themeDark } from "../helpers/theme";
+import useSaveLocaleCookie from "../hooks/useSaveLocaleCookie";
 
 // Import types
 import type { AppProps } from "next/app";
@@ -28,7 +29,10 @@ const globalStyle = globalCss(globalStyles);
 
 // Fire the app
 export default function MyApp({ Component, pageProps }: AppProps) {
+  // Set global css
   globalStyle();
+  // Save locale cookie
+  useSaveLocaleCookie();
 
   return (
     <>

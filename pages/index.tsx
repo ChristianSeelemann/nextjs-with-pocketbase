@@ -10,10 +10,11 @@ import { AiOutlineApi, AiOutlineHtml5 } from "react-icons/ai";
 import { FaReact, FaWpforms } from "react-icons/fa";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { BsTranslate } from "react-icons/bs";
+import LanguageSwitcher from "../components/layout/LanguageSwitcher";
 
 // Fire the Home page
 export default function Home() {
-  const { t, lang } = useTranslation("common");
+  const { t } = useTranslation("common");
 
   const MockItems = ({
     text,
@@ -183,6 +184,7 @@ export default function Home() {
           </Grid.Container>
         </Container>
         <ColorSwitcher />
+        <LanguageSwitcher />
       </main>
     </>
   );
