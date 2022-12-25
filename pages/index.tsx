@@ -2,6 +2,7 @@
 import Head from "next/head";
 import { Card, Container, Grid, Text, useTheme } from "@nextui-org/react";
 import ColorSwitcher from "../components/layout/ColorSwitcher";
+import useTranslation from "next-translate/useTranslation";
 
 // Import icons
 import { SiTailwindcss } from "react-icons/si";
@@ -12,6 +13,8 @@ import { BsTranslate } from "react-icons/bs";
 
 // Fire the Home page
 export default function Home() {
+  const { t, lang } = useTranslation("common");
+
   const MockItems = ({
     text,
     icon,
@@ -51,11 +54,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>{process.env.NEXT_PUBLIC_APP_TITLE}</title>
-        <meta
-          name="description"
-          content={process.env.NEXT_PUBLIC_META_DESCRIPTION}
-        />
+        <title>{t("metaTitle")}</title>
+        <meta name="description" content={t("metaDescription")} />
       </Head>
       <main>
         <Container>
@@ -63,7 +63,7 @@ export default function Home() {
             h1
             css={{ textAlign: "center", mt: "$2xl", mb: "$xl", lh: "$sm" }}
           >
-            Next.js + NextUI + Tailwind + Pocketbase = Boilerplate
+            {t("title")}
           </Text>
         </Container>
         <Container md>
@@ -161,7 +161,7 @@ export default function Home() {
                     }}
                   />
                 }
-                title="i18n - Coming Soon"
+                title="Translation"
               />
             </Grid>
             <Grid className="w-full xs:w-1/2 sm:w-1/3 md:w-1/4">
