@@ -1,8 +1,9 @@
 //Import components
 import Head from "next/head";
 import { Card, Container, Grid, Text, useTheme } from "@nextui-org/react";
-import ColorSwitcher from "../components/layout/ColorSwitcher";
+import ColorSwitcher from "../components/interactive/ColorSwitcher";
 import useTranslation from "next-translate/useTranslation";
+import Layout from "../components/layouts/RootLayout";
 
 // Import icons
 import { SiTailwindcss } from "react-icons/si";
@@ -10,7 +11,10 @@ import { AiOutlineApi, AiOutlineHtml5 } from "react-icons/ai";
 import { FaReact, FaWpforms } from "react-icons/fa";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { BsTranslate } from "react-icons/bs";
-import LanguageSwitcher from "../components/layout/LanguageSwitcher";
+import LanguageSwitcher from "../components/interactive/LanguageSwitcher";
+
+// Import types
+import type { ReactElement } from "react";
 
 // Fire the Home page
 export default function Home() {
@@ -32,6 +36,7 @@ export default function Home() {
             <Grid>{icon}</Grid>
             <Grid>
               <Text
+                h2
                 css={{
                   fontWeight: 700,
                   fontSize: 18,
@@ -58,134 +63,136 @@ export default function Home() {
         <title>{t("metaTitle")}</title>
         <meta name="description" content={t("metaDescription")} />
       </Head>
-      <main>
-        <Container>
-          <Text
-            h1
-            css={{ textAlign: "center", mt: "$2xl", mb: "$xl", lh: "$sm" }}
-          >
-            {t("title")}
-          </Text>
-        </Container>
-        <Container md>
-          <Grid.Container gap={2} justify="center">
-            <Grid className="w-full xs:w-1/2 sm:w-1/3 md:w-1/4">
-              <MockItems
-                text="Next.js for the complete frontend. Version 13+ without app directory."
-                icon={
-                  <AiOutlineHtml5
-                    size={34}
-                    className="rounded-full p-[0.35rem]"
-                    style={{
-                      backgroundColor: theme?.colors.secondaryLightActive.value,
-                      fill: theme?.colors.secondarySolidHover.value,
-                    }}
-                  />
-                }
-                title="Next.js"
-              />
-            </Grid>
-            <Grid className="w-full xs:w-1/2 sm:w-1/3 md:w-1/4">
-              <MockItems
-                text="Pocketbase for the backend, authentication, storage and database."
-                icon={
-                  <AiOutlineApi
-                    size={34}
-                    className="rounded-full p-[0.3rem]"
-                    style={{
-                      backgroundColor: theme?.colors.secondaryLightActive.value,
-                      fill: theme?.colors.secondarySolidHover.value,
-                    }}
-                  />
-                }
-                title="Pocketpase"
-              />
-            </Grid>
-            <Grid className="w-full xs:w-1/2 sm:w-1/3 md:w-1/4">
-              <MockItems
-                text="The best CSS framework for Next.js. Tailwind and NextUI."
-                icon={
-                  <SiTailwindcss
-                    size={34}
-                    className="rounded-full p-[0.3rem]"
-                    style={{
-                      backgroundColor: theme?.colors.secondaryLightActive.value,
-                      fill: theme?.colors.secondarySolidHover.value,
-                    }}
-                  />
-                }
-                title="Tailwind & NextUI"
-              />
-            </Grid>
-            <Grid className="w-full xs:w-1/2 sm:w-1/3 md:w-1/4">
-              <MockItems
-                text="The best framework when it comes to icon."
-                icon={
-                  <FaReact
-                    size={34}
-                    className="rounded-full p-[0.4rem]"
-                    style={{
-                      backgroundColor: theme?.colors.secondaryLightActive.value,
-                      fill: theme?.colors.secondarySolidHover.value,
-                    }}
-                  />
-                }
-                title="React-Icons"
-              />
-            </Grid>
-            <Grid className="w-full xs:w-1/2 sm:w-1/3 md:w-1/4">
-              <MockItems
-                text="Dark Mode Solution with Next Color Mode and NextUI and custom logic."
-                icon={
-                  <MdOutlineDarkMode
-                    size={34}
-                    className="rounded-full p-[0.3rem]"
-                    style={{
-                      backgroundColor: theme?.colors.secondaryLightActive.value,
-                      fill: theme?.colors.secondarySolidHover.value,
-                    }}
-                  />
-                }
-                title="Dark Mode"
-              />
-            </Grid>
-            <Grid className="w-full xs:w-1/2 sm:w-1/3 md:w-1/4">
-              <MockItems
-                text="i18n with Next.js and Next-Translate for internationalization."
-                icon={
-                  <BsTranslate
-                    size={34}
-                    className="rounded-full p-2"
-                    style={{
-                      backgroundColor: theme?.colors.secondaryLightActive.value,
-                      fill: theme?.colors.secondarySolidHover.value,
-                    }}
-                  />
-                }
-                title="Translation"
-              />
-            </Grid>
-            <Grid className="w-full xs:w-1/2 sm:w-1/3 md:w-1/4">
-              <MockItems
-                text="Formik and Yup for easy and hasslefree forms and form validation."
-                icon={
-                  <FaWpforms
-                    size={34}
-                    className="rounded-full p-2"
-                    style={{
-                      backgroundColor: theme?.colors.secondaryLightActive.value,
-                      fill: theme?.colors.secondarySolidHover.value,
-                    }}
-                  />
-                }
-                title="Formik - Coming Soon"
-              />
-            </Grid>
-          </Grid.Container>
-        </Container>
-        <ColorSwitcher />
-        <LanguageSwitcher />
-      </main>
+      <Container>
+        <Text
+          h2
+          css={{ textAlign: "center", mt: "$2xl", mb: "$xl", lh: "$sm" }}
+        >
+          {t("title")}
+        </Text>
+      </Container>
+      <Container md>
+        <Grid.Container gap={2} justify="center">
+          <Grid className="w-full xs:w-1/2 sm:w-1/3 md:w-1/4">
+            <MockItems
+              text="Next.js for the complete frontend. Version 13+ without app directory."
+              icon={
+                <AiOutlineHtml5
+                  size={34}
+                  className="rounded-full p-[0.35rem]"
+                  style={{
+                    backgroundColor: theme?.colors.secondaryLightActive.value,
+                    fill: theme?.colors.secondarySolidHover.value,
+                  }}
+                />
+              }
+              title="Next.js"
+            />
+          </Grid>
+          <Grid className="w-full xs:w-1/2 sm:w-1/3 md:w-1/4">
+            <MockItems
+              text="Pocketbase for the backend, authentication, storage and database."
+              icon={
+                <AiOutlineApi
+                  size={34}
+                  className="rounded-full p-[0.3rem]"
+                  style={{
+                    backgroundColor: theme?.colors.secondaryLightActive.value,
+                    fill: theme?.colors.secondarySolidHover.value,
+                  }}
+                />
+              }
+              title="Pocketpase"
+            />
+          </Grid>
+          <Grid className="w-full xs:w-1/2 sm:w-1/3 md:w-1/4">
+            <MockItems
+              text="The best CSS framework for Next.js. Tailwind and NextUI."
+              icon={
+                <SiTailwindcss
+                  size={34}
+                  className="rounded-full p-[0.3rem]"
+                  style={{
+                    backgroundColor: theme?.colors.secondaryLightActive.value,
+                    fill: theme?.colors.secondarySolidHover.value,
+                  }}
+                />
+              }
+              title="Tailwind & NextUI"
+            />
+          </Grid>
+          <Grid className="w-full xs:w-1/2 sm:w-1/3 md:w-1/4">
+            <MockItems
+              text="The best framework when it comes to icon."
+              icon={
+                <FaReact
+                  size={34}
+                  className="rounded-full p-[0.4rem]"
+                  style={{
+                    backgroundColor: theme?.colors.secondaryLightActive.value,
+                    fill: theme?.colors.secondarySolidHover.value,
+                  }}
+                />
+              }
+              title="React-Icons"
+            />
+          </Grid>
+          <Grid className="w-full xs:w-1/2 sm:w-1/3 md:w-1/4">
+            <MockItems
+              text="Dark Mode Solution with Next Color Mode and NextUI and custom logic."
+              icon={
+                <MdOutlineDarkMode
+                  size={34}
+                  className="rounded-full p-[0.3rem]"
+                  style={{
+                    backgroundColor: theme?.colors.secondaryLightActive.value,
+                    fill: theme?.colors.secondarySolidHover.value,
+                  }}
+                />
+              }
+              title="Dark Mode"
+            />
+          </Grid>
+          <Grid className="w-full xs:w-1/2 sm:w-1/3 md:w-1/4">
+            <MockItems
+              text="i18n with Next.js and Next-Translate for internationalization."
+              icon={
+                <BsTranslate
+                  size={34}
+                  className="rounded-full p-2"
+                  style={{
+                    backgroundColor: theme?.colors.secondaryLightActive.value,
+                    fill: theme?.colors.secondarySolidHover.value,
+                  }}
+                />
+              }
+              title="Translation"
+            />
+          </Grid>
+          <Grid className="w-full xs:w-1/2 sm:w-1/3 md:w-1/4">
+            <MockItems
+              text="Formik and Yup for easy and hasslefree forms and form validation."
+              icon={
+                <FaWpforms
+                  size={34}
+                  className="rounded-full p-2"
+                  style={{
+                    backgroundColor: theme?.colors.secondaryLightActive.value,
+                    fill: theme?.colors.secondarySolidHover.value,
+                  }}
+                />
+              }
+              title="Formik - Coming Soon"
+            />
+          </Grid>
+        </Grid.Container>
+      </Container>
+      <ColorSwitcher />
+      <LanguageSwitcher />
     </>
   );
 }
+
+Home.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>;
+};

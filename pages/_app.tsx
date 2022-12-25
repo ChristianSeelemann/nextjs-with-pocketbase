@@ -1,6 +1,7 @@
 // Import used fonts
 import "@fontsource/bai-jamjuree/400.css";
 import "@fontsource/bai-jamjuree/400-italic.css";
+import "@fontsource/bai-jamjuree/600.css";
 import "@fontsource/bai-jamjuree/700.css";
 import "@fontsource/bai-jamjuree/700-italic.css";
 import "@fontsource/chakra-petch/700.css";
@@ -17,8 +18,18 @@ import globalStyles from "../helpers/globalStyles";
 import { themeLight, themeDark } from "../helpers/theme";
 import useSaveLocaleCookie from "../hooks/useSaveLocaleCookie";
 
-// Import types
+// Import and set types
+import type { ReactElement, ReactNode } from "react";
 import type { AppProps } from "next/app";
+import type { NextPage } from "next";
+
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
 
 // Create custom themes
 const lightTheme = createTheme(themeLight);
@@ -28,7 +39,9 @@ const darkTheme = createTheme(themeDark);
 const globalStyle = globalCss(globalStyles);
 
 // Fire the app
-export default function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page);
+
   // Set global css
   globalStyle();
   // Save locale cookie
@@ -54,7 +67,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         }}
       >
         <NextUIProvider>
-          <Component {...pageProps} />
+          {getLayout(<Component {...pageProps} />)}
         </NextUIProvider>
       </NextThemesProvider>
     </>
