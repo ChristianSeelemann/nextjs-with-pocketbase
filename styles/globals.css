@@ -4,11 +4,15 @@
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
 * {
-  scrollbar-width: thin;
+  scrollbar-width: auto;
   scrollbar-color: #abc8ff2a transparent;
 }
 
-html.dark * {
+body {
+  overflow-y: scroll !important;
+}
+
+html.dark-theme * {
   scrollbar-color: #abc8ff2a transparent;
 }
 
@@ -22,11 +26,15 @@ html.dark * {
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #4f545e4d;
+  background-color: #3d41494d;
   border-radius: 12px;
 }
 
-html.dark *::-webkit-scrollbar-thumb {
-  background-color: #abc8ff2a;
+html.dark-theme *::-webkit-scrollbar-thumb {
+  background-color: #97a1b44d;
   border-radius: 12px;
+}
+
+.nextui-navbar-collapse-wrapper {
+  overflow: hidden;
 }
