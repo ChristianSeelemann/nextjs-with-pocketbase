@@ -11,56 +11,27 @@ import "../styles/globals.css";
 
 // Import components
 import Head from "next/head";
-import createEmotionCache from "../helpers/createEmotionCache";
-import { CacheProvider, EmotionCache } from "@emotion/react";
-import {
-  CssBaseline,
-  ThemeProvider,
-  createTheme,
-  useMediaQuery,
-} from "@mui/material";
+import { NextUIProvider, createTheme, globalCss } from "@nextui-org/react";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+import globalStyles from "../helpers/globalStyles";
+import { themeLight, themeDark } from "../helpers/theme";
 
 // Import types
 import type { AppProps } from "next/app";
-import { useState } from "react";
 
-// Client-side cache, shared for the session
-const clientSideEmotionCache = createEmotionCache();
+// Create custom themes
+const lightTheme = createTheme(themeLight);
+const darkTheme = createTheme(themeDark);
 
-// Define MyAppProps type
-interface MyAppProps extends AppProps {
-  emotionCache?: EmotionCache;
-}
+// Create global css
+const globalStyle = globalCss(globalStyles);
 
 // Fire the app
-export default function MyApp(props: MyAppProps) {
-  // Set the emotion cache to the client-side cache
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-
-  // Set the default theme to light
-  const [selectedTheme, setSelectedTheme] = useState<"light" | "dark">("light");
-
-  // Create the theme instance
-  const theme = createTheme({
-    palette: {
-      mode: selectedTheme,
-    },
-    typography: {
-      fontFamily: "Bai Jamjuree, sans-serif",
-    },
-  });
-
-  // Change theme toggle function
-  const toggleTheme = () => {
-    const newTheme = selectedTheme === "light" ? "dark" : "light";
-    setSelectedTheme(newTheme);
-  };
-
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  console.log(prefersDarkMode);
+export default function MyApp({ Component, pageProps }: AppProps) {
+  globalStyle();
 
   return (
-    <CacheProvider value={emotionCache}>
+    <>
       <Head>
         <title>{process.env.NEXT_PUBLIC_APP_TITLE}</title>
         <meta
@@ -70,14 +41,18 @@ export default function MyApp(props: MyAppProps) {
         <link rel="shortcut icon" href="/favicon.ico" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Component
-          {...pageProps}
-          toggleTheme={toggleTheme}
-          selectedTheme={selectedTheme}
-        />
-      </ThemeProvider>
-    </CacheProvider>
+      <NextThemesProvider
+        defaultTheme="system"
+        attribute="class"
+        value={{
+          light: lightTheme.className,
+          dark: darkTheme.className,
+        }}
+      >
+        <NextUIProvider>
+          <Component {...pageProps} />
+        </NextUIProvider>
+      </NextThemesProvider>
+    </>
   );
 }
