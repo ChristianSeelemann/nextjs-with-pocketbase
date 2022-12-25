@@ -3,6 +3,9 @@ import useTranslation from "next-translate/useTranslation";
 import setLanguage from "next-translate/setLanguage";
 import { Button } from "@nextui-org/react";
 
+// Import icons
+import { IoLanguage } from "react-icons/io5";
+
 // Import i18n config and set locales
 import i18nConfig from "../../i18n.json";
 const { locales } = i18nConfig;
@@ -21,6 +24,10 @@ export default function ChangeLanguage() {
           <Button
             key={lng}
             auto
+            color="gradient"
+            shadow
+            ghost
+            icon={<IoLanguage />}
             onClick={async () => {
               await setLanguage(lng);
             }}
