@@ -12,7 +12,8 @@ This is my boilerplate for the stable Next.js version without app directory. It 
 
 ## Other features
 
-- MaterialUI
+- NextUI
 - TailwindCSS
+- NextUI
 - React-Icons
-- Dark-Mode
+- Dark-Mode with NextUI and next-themes
