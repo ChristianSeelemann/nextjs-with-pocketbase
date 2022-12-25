@@ -11,11 +11,9 @@ export default function useSaveLocaleCookie() {
 
   // Save the locale cookie
   function saveLocaleCookie() {
-    if (locale !== defaultLocale) {
-      const date = new Date();
-      const expire = 30 * 24 * 60 * 60 * 1000; // 30 days
-      date.setTime(date.getTime() + expire);
-      document.cookie = `NEXT_LOCALE=${locale};expires=${date.toUTCString()};path=/`;
-    }
+    const date = new Date();
+    const expire = 30 * 24 * 60 * 60 * 1000; // 30 days
+    date.setTime(date.getTime() + expire);
+    document.cookie = `NEXT_LOCALE=${locale};expires=${date.toUTCString()};path=/`;
   }
 }
