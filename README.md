@@ -17,3 +17,5 @@ This is my boilerplate for the stable Next.js version without app directory. It 
 - NextUI
 - React-Icons
 - Dark-Mode with NextUI and next-themes
+- Internationalization with next-translate
+- Formik and Yup for easy and hasslefree forms and form validation (Coming Soon)
