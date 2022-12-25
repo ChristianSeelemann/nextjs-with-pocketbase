@@ -1,35 +1,5 @@
-@tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-html {
-  @apply font-primary;
-}
-
-@layer components {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-bold font-secondary;
-  }
-  h1 {
-    @apply text-4xl pb-6;
-  }
-  h2 {
-    @apply text-2xl pb-5;
-  }
-  h3 {
-    @apply text-xl pb-3;
-  }
-  h4,
-  h5,
-  h6 {
-    @apply text-lg pb-2;
-  }
-}
 
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
