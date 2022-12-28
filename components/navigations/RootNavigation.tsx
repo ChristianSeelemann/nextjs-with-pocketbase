@@ -1,8 +1,9 @@
 // Import components
-import { Navbar, Text, Link as UILink, Badge } from "@nextui-org/react";
+import { Navbar, Text, Badge } from "@nextui-org/react";
 import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { setCookie } from "cookies-next";
 
 const collapseItems = ["Features", "Customers", "Pricing"];
 
@@ -27,26 +28,24 @@ export default function RootNavigation() {
           activeColor="secondary"
           enableCursorHighlight
         >
-          <Link href="/">
+          <Link href="/" locale={router.locale}>
             <Navbar.Item isActive={router.pathname === "/" ? true : false}>
               Home
             </Navbar.Item>
           </Link>
-          <Link href="/features">
+          <Link href="/login" locale={router.locale}>
             <Navbar.Item
-              isActive={router.pathname === "/features" ? true : false}
+              isActive={router.pathname === "/login" ? true : false}
+              onClick={() => {
+                setCookie("redirect_after_login", router.asPath);
+              }}
             >
-              Features
-            </Navbar.Item>
-          </Link>
-          <Link href="/blog">
-            <Navbar.Item isActive={router.pathname === "/blog" ? true : false}>
-              Blog
+              Login
             </Navbar.Item>
           </Link>
         </Navbar.Content>
         <Navbar.Collapse transitionTime={300}>
-          {collapseItems.map((item, index) => (
+          {collapseItems.map((item) => (
             <Navbar.CollapseItem key={item}>
               <Link href="/" className="text-inherit w-full">
                 {item}

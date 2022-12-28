@@ -34,7 +34,7 @@ export default function Home() {
         <Card.Header>
           <Grid.Container gap={1} alignItems="center">
             <Grid>{icon}</Grid>
-            <Grid>
+            <Grid className="mt-3">
               <Text
                 h2
                 css={{
@@ -60,8 +60,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>{t("metaTitle")}</title>
-        <meta name="description" content={t("metaDescription")} />
+        <title>{t("sitename")}</title>
+        <meta name="description" content={t("meta_description")} />
       </Head>
       <Container>
         <Text
