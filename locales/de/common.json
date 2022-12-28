@@ -1,6 +1,6 @@
 {
-  "metaTitle": "Development Vorlage",
-  "metaDescription": "Next.js + NextUI + Tailwind + Pocketbase = Vorlage",
+  "sitename": "Development Vorlage",
+  "meta_description": "Next.js + NextUI + Tailwind + Pocketbase = Vorlage",
   "title": "Next.js + NextUI + Tailwind + Pocketbase = Vorlage",
   "de": "German",
   "en": "English"
