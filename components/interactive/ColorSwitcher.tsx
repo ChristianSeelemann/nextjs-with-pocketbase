@@ -7,7 +7,13 @@ import { IoMoon, IoSunny } from "react-icons/io5";
 import { useEffect, useState } from "react";
 
 // Fire the component
-export default function ColorSwitcher() {
+export default function ColorSwitcher({
+  size,
+  shadow,
+}: {
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  shadow?: boolean;
+}) {
   const { setTheme } = useNextTheme();
   const { isDark } = useTheme();
 
@@ -26,8 +32,10 @@ export default function ColorSwitcher() {
   return (
     <Switch
       checked={isDark}
-      shadow
-      size="lg"
+      initialChecked={isDark}
+      shadow={shadow ? shadow : false}
+      color="secondary"
+      size={size ? size : "lg"}
       iconOn={<IoMoon className="text-yellow-100" />}
       iconOff={<IoSunny className="text-yellow-500" />}
       onChange={(e) => setTheme(e.target.checked ? "dark" : "light")}
