@@ -1,6 +1,7 @@
 // Import components
 import useTranslation from "next-translate/useTranslation";
 import setLanguage from "next-translate/setLanguage";
+import { setCookie } from "cookies-next";
 import { Button } from "@nextui-org/react";
 
 // Import icons
@@ -29,6 +30,9 @@ export default function ChangeLanguage() {
             ghost
             icon={<IoLanguage />}
             onClick={async () => {
+              setCookie("NEXT_LOCALE", lng, {
+                maxAge: 365 * 24 * 60 * 60,
+              });
               await setLanguage(lng);
             }}
           >
