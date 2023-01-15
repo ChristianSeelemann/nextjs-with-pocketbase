@@ -56,6 +56,7 @@ export default function LoginPage({
               showOnline: true,
               lastActive: new Date(),
               emailVisibility: false,
+              verified: true,
             }
           )
           .then((response) => {
@@ -181,6 +182,17 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
+  // If the language cookie is not the actual language, redirect to correct language
+  if (languageCookie && languageCookie !== context.locale) {
+    return {
+      redirect: {
+        destination: "/" + languageCookie + context.resolvedUrl,
+        permanent: false,
+      },
+    };
+  }
+
+  // Return the props when user is not logged in and correct language is set
   return {
     props: {
       isLoggedIn: pb.authStore.isValid,
