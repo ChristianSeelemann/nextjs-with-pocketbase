@@ -4,20 +4,27 @@ import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { setCookie } from "cookies-next";
+import ColorSwitcher from "../interactive/ColorSwitcher";
 
 const collapseItems = ["Features", "Customers", "Pricing"];
 
 export default function RootNavigation() {
   const { t } = useTranslation("common");
   const router = useRouter();
+  const shortUrl = router.asPath.split("/")[1];
 
   return (
     <>
-      <Navbar variant="sticky" className="fixed" shouldHideOnScroll>
+      <Navbar
+        variant="sticky"
+        className="fixed"
+        shouldHideOnScroll
+        maxWidth="xl"
+      >
         <Navbar.Brand className="gap-4">
           <Navbar.Toggle aria-label="Toggle Navigation" />
           <Text h1 className="text-xl m-0 uppercase tracking-wide">
-            {t("metaTitle")}
+            {t("sitename")}
           </Text>
           <Badge color="secondary" size="sm" variant="flat">
             ALPHA
@@ -33,9 +40,19 @@ export default function RootNavigation() {
               Home
             </Navbar.Item>
           </Link>
+          <Link href="/user" locale={router.locale}>
+            <Navbar.Item isActive={shortUrl === "user" ? true : false}>
+              User
+            </Navbar.Item>
+          </Link>
+          <Link href="/dashboard" locale={router.locale}>
+            <Navbar.Item isActive={shortUrl === "dashboard" ? true : false}>
+              Dashboard
+            </Navbar.Item>
+          </Link>
           <Link href="/login" locale={router.locale}>
             <Navbar.Item
-              isActive={router.pathname === "/login" ? true : false}
+              isActive={shortUrl === "login" ? true : false}
               onClick={() => {
                 setCookie("redirect_after_login", router.asPath);
               }}
@@ -43,6 +60,9 @@ export default function RootNavigation() {
               Login
             </Navbar.Item>
           </Link>
+          <Navbar.Item>
+            <ColorSwitcher shadow />
+          </Navbar.Item>
         </Navbar.Content>
         <Navbar.Collapse transitionTime={300}>
           {collapseItems.map((item) => (
