@@ -3,5 +3,6 @@
   "meta_description": "Next.js + NextUI + Tailwind + Pocketbase = Boilerplate",
   "title": "Next.js + NextUI + Tailwind + Pocketbase = Boilerplate",
   "de": "Deutsch",
-  "en": "English"
+  "en": "English",
+  "settings": "Settings"
 }
