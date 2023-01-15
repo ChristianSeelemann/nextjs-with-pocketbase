@@ -1,9 +1,11 @@
 //Import components
 import Head from "next/head";
 import { Card, Container, Grid, Text, useTheme } from "@nextui-org/react";
-import ColorSwitcher from "../components/interactive/ColorSwitcher";
 import useTranslation from "next-translate/useTranslation";
+import { getCookie } from "cookies-next";
 import Layout from "../components/layouts/RootLayout";
+import initPocketBase from "../helpers/initPocketbase";
+import LanguageSwitcher from "../components/interactive/LanguageSwitcher";
 
 // Import icons
 import { SiTailwindcss } from "react-icons/si";
@@ -11,10 +13,10 @@ import { AiOutlineApi, AiOutlineHtml5 } from "react-icons/ai";
 import { FaReact, FaWpforms } from "react-icons/fa";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { BsTranslate } from "react-icons/bs";
-import LanguageSwitcher from "../components/interactive/LanguageSwitcher";
 
 // Import types
 import type { ReactElement } from "react";
+import type { GetServerSidePropsContext } from "next";
 
 // Fire the Home page
 export default function Home() {
@@ -187,10 +189,39 @@ export default function Home() {
           </Grid>
         </Grid.Container>
       </Container>
-      <ColorSwitcher />
       <LanguageSwitcher />
     </>
   );
+}
+
+// Export serverside props
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  // Get the language cookie
+  const langCookie = getCookie("NEXT_LOCALE", context.res);
+
+  // Init PocketBase
+  const pb = await initPocketBase(context);
+
+  // Strip the authData from the pb authStore
+  const authData = JSON.parse(JSON.stringify(pb.authStore));
+
+  // If the language cookie is not the actual language, redirect to correct language
+  if (langCookie && langCookie !== context.locale) {
+    return {
+      redirect: {
+        destination: "/" + langCookie + context.resolvedUrl,
+        permanent: false,
+      },
+    };
+  }
+
+  // Return the props if the correct language is set
+  return {
+    props: {
+      isLoggedIn: pb.authStore.isValid,
+      authData: authData.baseModel,
+    },
+  };
 }
 
 Home.getLayout = function getLayout(page: ReactElement) {
