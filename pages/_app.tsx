@@ -50,11 +50,6 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <>
       <Head>
-        <title>{process.env.NEXT_PUBLIC_APP_TITLE}</title>
-        <meta
-          name="description"
-          content={process.env.NEXT_PUBLIC_META_DESCRIPTION}
-        />
         <link rel="shortcut icon" href="/favicon.ico" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
